@@ -35,7 +35,7 @@
         <div id="firebaseui-auth-container">
 
         </div>
-        <div>
+        <div id="table-block">
             <!-- Content here -->
 
             <div>
@@ -114,6 +114,28 @@
     ui.start('#firebaseui-auth-container', uiConfig);
 </script>
 
+<script>
+    
+    firebase.auth().onAuthStateChanged((user) => {
+        var currentPath = window.location.pathname;
+        var loginBlock = document.getElementById('firebaseui-auth-container')
+        var tableBlock = document.getElementById('table-block')
+
+        loginBlock.style.display = 'none';
+        tableBlock.style.display = 'none';
+
+        if (user) {
+            tableBlock.style.display = 'display';
+
+        }
+
+        else {
+            loginBlock.style.display = 'display';
+
+        }
+
+    });
+</script>
 
 <script>
     var ImgUrl, ImgName;
