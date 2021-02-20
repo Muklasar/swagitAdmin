@@ -17,6 +17,7 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -30,6 +31,21 @@
     <div id="style-div">
 
     </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">USER ID</th>
+            <th scope="col">USER NAME</th>
+            <th scope="col">EMAIL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="table-row">
+            
+          </tr>
+          
+        </tbody>
+      </table>
 </body>
 
 <script>
@@ -121,23 +137,26 @@
     db.collection("users").get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
-                imageList = doc.data().StyleImgUrl;
-                    if (imageList) {
+                userId = doc.id
+                userName = doc.data().UserName;
+                userEmail = doc.data().UserEmail;
 
-                        var newImageList = imageList.reverse()
-                        var styleDiv = document.getElementById('style-div')
+                tableRow = document.getElementById('table-row')
+                tdUserId = document.createElement('td')
+                tdUserName = document.createElement('td')
+                tdUserEmail = document.createElement('td')
 
-                        for (i = 0; i < newImageList.length; i++) {
-                            const image = document.createElement('img')
-                            image.src = newImageList[i]
-                            image.style = "width:100px; height:120px; margin-bottom: 20px"
-                            styleDiv.appendChild(image)
+                tdUserId.innerText = userId;
+                tdUserName.innerText = userEmail;
+                tdUserEmail.innerText = userName;
 
-                        }
-                        
-                    }
+                tableRow.appendChild(tdUserId)
+                tableRow.appendChild(tdUserName)
+                tableRow.appendChild(tdUserEmail)
             });
         });
 </script>
 
 </html>
+
+
