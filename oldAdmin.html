@@ -42,7 +42,7 @@
                 <input type="file" id="fileButton" />
                 <input type="button" value="upload" onclick="uploadStyleImages()">
             </div>
-
+            
             <table class="table" id="user-table">
                 <thead>
                     <tr>
@@ -115,7 +115,7 @@
 </script>
 
 <script>
-
+    
     firebase.auth().onAuthStateChanged((user) => {
         var currentPath = window.location.pathname;
         var loginBlock = document.getElementById('firebaseui-auth-container')
@@ -184,48 +184,11 @@
                 userTable = document.getElementById('user-table')
                 tbody = document.createElement('tbody')
                 tableRow = document.createElement('tr')
-                uploadDiv = document.createElement('div')
 
                 tdUserId = document.createElement('td')
                 tdUserName = document.createElement('td')
                 tdUserEmail = document.createElement('td')
-                tdUpload = document.createElement('td')
                 showButton = document.createElement('button')
-
-                file = document.createElement('input[type="file"]')
-                file.id = 'fileButton'
-                uploadButton = document.createElement('button')
-
-                uploadButton.onclick = function () {
-                    var fileImage = document.getElementById('fileButton')
-                    console.log("Uploading...", fileImage);
-                    if (fileImage.files.length) {
-                        var storageRef = firebase.storage().ref('photo/' + fileImage.files[0].name);
-                        storageRef.put(fileImage.files[0]).then((snapshot) => {
-                            console.log('Uploaded a blob or file!', snapshot);
-
-                            storageRef.getDownloadURL()
-                                .then(url => {
-                                    console.log('Uploaded a blob or file!', url);
-
-                                    ImgUrl = url;
-                                    data = db.collection("users").doc(doc.id)
-                                        .set({
-                                            StyleImgUrl: firebase.firestore.FieldValue.arrayUnion(ImgUrl),
-
-                                        }, {
-                                            merge: true,
-                                        })
-                                })
-                            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                            console.log(percentage)
-
-
-                        });
-
-                    }
-                }
-
 
                 tdUserId.innerText = userId;
                 tdUserName.innerText = userName;
@@ -249,19 +212,15 @@
                             styleDiv.appendChild(image)
 
                         }
-
+                        
                     }
-
+                    
                     imageList = []
                 };
-
-                uploadDiv.appendChild(file)
-                uploadDiv.appendChild(uploadButton)
 
                 tableRow.appendChild(tdUserId)
                 tableRow.appendChild(tdUserName)
                 tableRow.appendChild(tdUserEmail)
-                tableRow.appendChild(uploadDiv)
                 tableRow.appendChild(showButton)
 
                 tbody.appendChild(tableRow)
