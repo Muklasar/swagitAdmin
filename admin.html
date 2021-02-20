@@ -118,7 +118,21 @@
     db.collection("users").get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
-                console.log(doc.id, " => ", doc.data());
+                imageList = doc.data().StyleImgUrl;
+                    if (imageList) {
+
+                        var newImageList = imageList.reverse()
+                        var styleDiv = document.getElementById('style-div')
+
+                        for (i = 0; i < newImageList.length; i++) {
+                            const image = document.createElement('img')
+                            image.src = newImageList[i]
+                            image.style = "width:100px; height:120px; margin-bottom: 20px"
+                            imgDiv.appendChild(image)
+
+                        }
+                        
+                    }
             });
         });
 </script>
