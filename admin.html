@@ -41,6 +41,7 @@
                     <th scope="col">USER ID</th>
                     <th scope="col">USER NAME</th>
                     <th scope="col">EMAIL</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -153,19 +154,28 @@
                 tdUserId = document.createElement('td')
                 tdUserName = document.createElement('td')
                 tdUserEmail = document.createElement('td')
+                showButton = document.createElement('button')
 
                 tdUserId.innerText = userId;
                 tdUserName.innerText = userName;
                 tdUserEmail.innerText = userEmail;
+                showButton.onclick = "openModal()";
 
                 tableRow.appendChild(tdUserId)
                 tableRow.appendChild(tdUserName)
                 tableRow.appendChild(tdUserEmail)
+                tableRow.appendChild(showButton)
 
                 tbody.appendChild(tableRow)
                 userTable.appendChild(tbody)
             });
         });
+</script>
+
+<script>
+    function openModal(){
+        alert("open")
+    }
 </script>
 
 </html>
