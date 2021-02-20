@@ -174,7 +174,10 @@
                 showButton.innerText = "show";
                 showButton.onclick = function () {
                     console.log("open modal");
+                    console.log(doc.data());
                     imageList = doc.data().StyleImgUrl;
+                    console.log(imageList);
+
                     if (imageList) {
 
                         var newImageList = imageList.reverse()
