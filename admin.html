@@ -42,9 +42,7 @@
                 <input type="file" id="fileButton" />
                 <input type="button" value="upload" onclick="uploadStyleImages()">
             </div>
-            <div id="style-div">
-
-            </div>
+            
             <table class="table" id="user-table">
                 <thead>
                     <tr>
@@ -62,24 +60,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
+        <div id="style-div">
+
         </div>
     </div>
 </body>
@@ -190,10 +172,24 @@
                 tdUserName.innerText = userName;
                 tdUserEmail.innerText = userEmail;
                 showButton.innerText = "show";
-                showButton.onclick = function () {
+                showButton.onclick = function () {gallery
                     console.log("open modal");
-                    MyInput = document.getElementById("myInput")
-                    MyInput.trigger('focus');
+                    imageList = doc.data().StyleImgUrl;
+                    if (imageList) {
+
+                        var newImageList = imageList.reverse()
+                        var styleDiv = document.getElementById('style-div')
+
+                        for (i = 0; i < newImageList.length; i++) {
+                            const image = document.createElement('img')
+                            image.src = newImageList[i]
+                            image.style = "width:100px; height:120px; margin-bottom: 20px"
+                            styleDiv.appendChild(image)
+
+                        }
+                        
+                    }
+                    
                     
                 };
 
@@ -208,11 +204,5 @@
         });
 </script>
 
-<script>
-    function openModal() {
-        alert("open")
-        console.log("oprn modal")
-    }
-</script>
 
 </html>
