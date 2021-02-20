@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Palen</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+
+</head>
+
+<body>
+    <div id="firebaseui-auth-container">
+
+    </div>
+    <div>
+        <input type="file" id="fileButton" />
+        <input type="button" value="upload" onclick="uploadStyleImages()">
+    </div>
+</body>
+
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyDOralpZ69Eh_YMOHWR8LHRPtKZTBQFtMs",
+        authDomain: "swagit-authentication.firebaseapp.com",
+        databaseURL: "https://swagit-authentication-default-rtdb.firebaseio.com",
+        projectId: "swagit-authentication",
+        storageBucket: "swagit-authentication.appspot.com",
+        messagingSenderId: "756142162673",
+        appId: "1:756142162673:web:133a71fdd7f5c2a0b61f50",
+        measurementId: "G-R2BLQHPN4N"
+    };
+    // Initialize Firebase
+    var app = firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore(app)
+    firebase.analytics();
+
+</script>
+
+
+<script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+        signInSuccessUrl: '',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        //'signInFlow': 'popup',
+        // tosUrl and privacyPolicyUrl accept either url string or a callback
+        // function.
+        // Terms of service url/callback.
+        tosUrl: '<your-tos-url>',
+        // Privacy policy url/callback.
+        privacyPolicyUrl: function () {
+            window.location.assign('/');
+        }
+    };
+
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+
+<script>
+    var ImgUrl, ImgName;
+
+    function uploadStyleImages() {
+        var fileImage = document.getElementById('fileButton')
+        console.log("Uploading...", fileImage);
+        if (fileImage.files.length) {
+            var storageRef = firebase.storage().ref('photo/' + fileImage.files[0].name);
+            storageRef.put(fileImage.files[0]).then((snapshot) => {
+                console.log('Uploaded a blob or file!', snapshot);
+
+                storageRef.getDownloadURL()
+                    .then(url => {
+                        console.log('Uploaded a blob or file!', url);
+
+                        ImgUrl = url;
+                        data = db.collection("users").doc("ElBG7S4dcjUBqFKiqgZMlWhWzYJ2")
+                            .set({
+                                StyleImgUrl: firebase.firestore.FieldValue.arrayUnion(ImgUrl),
+
+                            }, {
+                                merge: true,
+                            })
+                    })
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                console.log(percentage)
+
+
+            });
+
+        }
+
+    }
+
+
+</script>
+
+</html>
