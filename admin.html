@@ -17,7 +17,8 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -31,21 +32,21 @@
     <div id="style-div">
 
     </div>
-    <table class="table">
+    <table class="table" id="user-table">
         <thead>
-          <tr>
-            <th scope="col">USER ID</th>
-            <th scope="col">USER NAME</th>
-            <th scope="col">EMAIL</th>
-          </tr>
+            <tr>
+                <th scope="col">USER ID</th>
+                <th scope="col">USER NAME</th>
+                <th scope="col">EMAIL</th>
+            </tr>
         </thead>
         <tbody>
-          <tr id="table-row">
-            
-          </tr>
-          
+            <tr>
+
+            </tr>
+
         </tbody>
-      </table>
+    </table>
 </body>
 
 <script>
@@ -141,7 +142,10 @@
                 userName = doc.data().UserName;
                 userEmail = doc.data().UserEmail;
 
-                tableRow = document.getElementById('table-row')
+                userTable = document.getElementById('user-table')
+                tbody = document.createElement('tbody')
+                tableRow = document.createElement('tr')
+
                 tdUserId = document.createElement('td')
                 tdUserName = document.createElement('td')
                 tdUserEmail = document.createElement('td')
@@ -153,10 +157,11 @@
                 tableRow.appendChild(tdUserId)
                 tableRow.appendChild(tdUserName)
                 tableRow.appendChild(tdUserEmail)
+
+                tbody.appendChild(tableRow)
+                userTable.appendChild(tbody)
             });
         });
 </script>
 
 </html>
-
-
