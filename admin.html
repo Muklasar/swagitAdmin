@@ -25,28 +25,32 @@
     <div id="firebaseui-auth-container">
 
     </div>
-    <div>
-        <input type="file" id="fileButton" />
-        <input type="button" value="upload" onclick="uploadStyleImages()">
+    <div class="container">
+        <!-- Content here -->
+
+        <div>
+            <input type="file" id="fileButton" />
+            <input type="button" value="upload" onclick="uploadStyleImages()">
+        </div>
+        <div id="style-div">
+
+        </div>
+        <table class="table" id="user-table">
+            <thead>
+                <tr>
+                    <th scope="col">USER ID</th>
+                    <th scope="col">USER NAME</th>
+                    <th scope="col">EMAIL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+
+            </tbody>
+        </table>
     </div>
-    <div id="style-div">
-
-    </div>
-    <table class="table" id="user-table">
-        <thead>
-            <tr>
-                <th scope="col">USER ID</th>
-                <th scope="col">USER NAME</th>
-                <th scope="col">EMAIL</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-            </tr>
-
-        </tbody>
-    </table>
 </body>
 
 <script>
@@ -151,8 +155,8 @@
                 tdUserEmail = document.createElement('td')
 
                 tdUserId.innerText = userId;
-                tdUserName.innerText = userEmail;
                 tdUserEmail.innerText = userName;
+                tdUserName.innerText = userEmail;
 
                 tableRow.appendChild(tdUserId)
                 tableRow.appendChild(tdUserName)
