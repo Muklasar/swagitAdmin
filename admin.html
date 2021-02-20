@@ -191,11 +191,10 @@
                 tdUserEmail.innerText = userEmail;
                 showButton.innerText = "show";
                 showButton.onclick = function () {
-                    console.log("open modal")
-                    $('#myModal').on('shown.bs.modal', function () {
-                        $('#myInput').trigger('focus')
-                    })
-
+                    console.log("open modal");
+                    MyInput = document.getElementById("myInput")
+                    MyInput.trigger('focus');
+                    
                 };
 
                 tableRow.appendChild(tdUserId)
