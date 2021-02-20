@@ -195,6 +195,7 @@
                 tdUserEmail.innerText = userEmail;
                 showButton.innerText = "show";
                 showButton.onclick = function () {
+                    styleDiv.innerHTML = "";
                     console.log("open modal");
                     console.log(doc.data());
                     imageList = doc.data().StyleImgUrl;
@@ -215,7 +216,7 @@
                         
                     }
 
-                    styleDiv.innerHTML = "";
+                   
                     
                     
                 };
