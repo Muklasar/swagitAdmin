@@ -159,7 +159,7 @@
                 tdUserId.innerText = userId;
                 tdUserName.innerText = userName;
                 tdUserEmail.innerText = userEmail;
-                showButton.value = "show"
+                showButton.innerText = "show";
                 showButton.onclick = "openModal()";
 
                 tableRow.appendChild(tdUserId)
@@ -176,6 +176,7 @@
 <script>
     function openModal(){
         alert("open")
+        console.log("oprn modal")
     }
 </script>
 
