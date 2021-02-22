@@ -42,7 +42,7 @@
                 <input type="file" id="fileButton" />
                 <input type="button" value="upload" onclick="uploadStyleImages()">
             </div>
-            
+
             <table class="table" id="user-table">
                 <thead>
                     <tr>
@@ -115,7 +115,7 @@
 </script>
 
 <script>
-    
+
     firebase.auth().onAuthStateChanged((user) => {
         var currentPath = window.location.pathname;
         var loginBlock = document.getElementById('firebaseui-auth-container')
@@ -174,7 +174,7 @@
 
 </script>
 <script>
-    
+
     db.collection("users").get()
         .then(querySnapshot => {
             querySnapshot.forEach(doc => {
@@ -213,14 +213,14 @@
                             styleDiv.appendChild(image)
 
                         }
-                        
+
                     }
 
-                   
-                    
-                    
+
+
+
                 };
-                
+
                 tableRow.appendChild(tdUserId)
                 tableRow.appendChild(tdUserName)
                 tableRow.appendChild(tdUserEmail)
@@ -229,8 +229,10 @@
                 tbody.appendChild(tableRow)
                 userTable.appendChild(tbody)
             });
+            var styleDiv = document.getElementById('style-div')
+            styleDiv.innerHTML = "";
         });
-       
+
 </script>
 
 
