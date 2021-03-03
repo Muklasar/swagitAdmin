@@ -28,3 +28,17 @@ messaging.onBackgroundMessage(function(payload) {
   self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
+messaging.getToken({ vapidKey: 'BApI0asOcygMhR0DdrE-6-D15PHOQOtHOvZKP1RxedHu3bqDTyuyIE3lXb-1LkJoOqDP2Q9kfWWT9TKzfgz61Ak' }).then((currentToken) => {
+  if (currentToken) {
+      console.log(currentToken)
+      // ...
+  } else {
+      // Show permission request UI
+      console.log('No registration token available. Request permission to generate one.');
+      // ...
+  }
+}).catch((err) => {
+  console.log('An error occurred while retrieving token. ', err);
+  // ...
+});
