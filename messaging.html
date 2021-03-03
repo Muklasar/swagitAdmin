@@ -23,7 +23,7 @@
 <body>
     <div class="container">
         <div id="style-div">
-            <h1>hello</h1>
+            <h1>hello1</h1>
         </div>
         <div>
 
@@ -52,7 +52,7 @@
     messaging.requestPermission()
         .then(function () {
             console.log('Have permission')
-            return messaging.getToken()
+            return messaging.getToken();
         })
         .then(function (token) {
             console.log(token)
