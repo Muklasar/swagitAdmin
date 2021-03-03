@@ -48,7 +48,7 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-    const messaging = firebse.messaging();
+    const messaging = firebase.messaging();
     messaging.requestPermission()
         .then(function () {
             console.log('Have permission')
