@@ -15,14 +15,42 @@
 <body>
     <div class="container">
         <div id="style-div">
-            <h1>hello1wxas</h1>
+            <h1>hello1wxas1</h1>
         </div>
         <div>
 
         </div>
     </div>
 </body>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyDLjiNnsvXnYIx_oKm4k0_VEyCgk7Tww_o",
+        authDomain: "auth-29.firebaseapp.com",
+        projectId: "auth-29",
+        storageBucket: "auth-29.appspot.com",
+        messagingSenderId: "718208349726",
+        appId: "1:718208349726:web:2ba4a1adb09e6dd0ab200f",
+        measurementId: "G-9D1H9HZH4Y"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+
+    const messaging = firebse.messaging();
+    messaging.requestPermission()
+        .then(function () {
+            console.log('Have permission')
+        })
+        .then(function (token) {
+            console.log(token)
+        })
+        .catch(function (err) {
+            console.log('error Occured')
+        })
+
+</script>
 <script src="./firebase-messaging-sw.js"></script>
-<script src="./app.js"></script>
+
 
 </html>
