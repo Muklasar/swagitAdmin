@@ -80,6 +80,18 @@
     // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', uiConfig);
 </script>
+
+<script>
+
+    firebase.auth().onAuthStateChanged((user) => {
+       
+        if (user) {
+            console.log(user)
+
+        }
+
+    });
+</script>
 <script>
 
 
@@ -98,18 +110,7 @@
 
 </script>
 
-<script>
 
-    firebase.auth().onAuthStateChanged((user) => {
-        var currentPath = window.location.pathname;
-       
-        if (user) {
-            console.log(user.username)
-
-        }
-
-    });
-</script>
 
 <script src="./firebase-messaging-sw.js"></script>
 
