@@ -45,54 +45,9 @@
         measurementId: "G-R2BLQHPN4N"
     };
     // Initialize Firebase
-    var app = firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore(app)
+    firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-</script>
-
-
-<script type="text/javascript">
-    // FirebaseUI config.
-    var uiConfig = {
-        signInSuccessUrl: 'https://muklasar.github.io/swagitAdmin/admin.html',
-        signInOptions: [
-            // Leave the lines as is for the providers you want to offer your users.
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        ],
-        tosUrl: '<your-tos-url>',
-        // Privacy policy url/callback.
-        privacyPolicyUrl: function () {
-            window.location.assign('https://muklasar.github.io/swagitAdmin/admin.html');
-        }
-    };
-
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
-</script>
-
-<script>
-
-    firebase.auth().onAuthStateChanged((user) => {
-        var currentPath = window.location.pathname;
-        var loginBlock = document.getElementById('firebaseui-auth-container')
-        var tableBlock = document.getElementById('table-block')
-
-        loginBlock.style.display = 'none';
-        tableBlock.style.display = 'none';
-
-        if (user) {
-            loginBlock.style.display = 'block';
-        }
-
-    });
-</script>
-
-<script>
     const messaging = firebse.messaging();
     messaging.requestPermission()
         .then(function () {
@@ -104,9 +59,8 @@
         .catch(function (err) {
             console.log('error Occured')
         })
+
+
 </script>
-
-
-
 
 </html>
