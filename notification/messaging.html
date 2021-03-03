@@ -24,7 +24,7 @@
 <body>
     <div class="container">
         <div id="firebaseui-auth-container">
-            
+
         </div>
         <div id="style-div">
             <h1>hello2</h1>
@@ -57,7 +57,7 @@
 <script type="text/javascript">
     // FirebaseUI config.
     var uiConfig = {
-        signInSuccessUrl: 'https://muklasar.github.io/swagitAdmin/admin.html',
+        signInSuccessUrl: 'https://muklasar.github.io/swagitAdmin/notification/messaging',
         signInOptions: [
             // Leave the lines as is for the providers you want to offer your users.
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -71,7 +71,7 @@
         tosUrl: '<your-tos-url>',
         // Privacy policy url/callback.
         privacyPolicyUrl: function () {
-            window.location.assign('https://muklasar.github.io/swagitAdmin/admin.html');
+            window.location.assign('https://muklasar.github.io/swagitAdmin/notification/messaging');
         }
     };
 
