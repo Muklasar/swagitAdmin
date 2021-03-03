@@ -92,6 +92,20 @@
     });
 </script>
 
+<script>
+    const messaging = firebse.messaging();
+    messaging.requestPermission()
+        .then(function () {
+            console.log('Have permission')
+        })
+        .then(function (token) {
+            console.log(token)
+        })
+        .catch(function (err) {
+            console.log('error Occured')
+        })
+</script>
+
 
 
 
