@@ -98,6 +98,19 @@
 
 </script>
 
+<script>
+
+    firebase.auth().onAuthStateChanged((user) => {
+        var currentPath = window.location.pathname;
+       
+        if (user) {
+            console.log(user.username)
+
+        }
+
+    });
+</script>
+
 <script src="./firebase-messaging-sw.js"></script>
 
 </html>
