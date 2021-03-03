@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Palen</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.1/firebase-ui-auth.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="firebaseui-auth-container">
+
+        </div>
+
+        <div id="look_container">
+
+        </div>
+    </div>
+</body>
+
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyDOralpZ69Eh_YMOHWR8LHRPtKZTBQFtMs",
+        authDomain: "swagit-authentication.firebaseapp.com",
+        databaseURL: "https://swagit-authentication-default-rtdb.firebaseio.com",
+        projectId: "swagit-authentication",
+        storageBucket: "swagit-authentication.appspot.com",
+        messagingSenderId: "756142162673",
+        appId: "1:756142162673:web:133a71fdd7f5c2a0b61f50",
+        measurementId: "G-R2BLQHPN4N"
+    };
+    // Initialize Firebase
+    var app = firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore(app)
+    firebase.analytics();
+
+</script>
+
+
+<script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+        signInSuccessUrl: 'https://muklasar.github.io/swagitAdmin/admin.html',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        //'signInFlow': 'popup',
+        // tosUrl and privacyPolicyUrl accept either url string or a callback
+        // function.
+        // Terms of service url/callback.
+        tosUrl: '<your-tos-url>',
+        // Privacy policy url/callback.
+        privacyPolicyUrl: function () {
+            window.location.assign('https://muklasar.github.io/swagitAdmin/admin.html');
+        }
+    };
+
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+<!-- <script>
+
+    firebase.auth().onAuthStateChanged((user) => {
+        var currentPath = window.location.pathname;
+        var loginBlock = document.getElementById('firebaseui-auth-container')
+        var tableBlock = document.getElementById('table-block')
+
+        loginBlock.style.display = 'none';
+        tableBlock.style.display = 'none';
+
+        if (user) {
+            tableBlock.style.display = 'block';
+
+        }
+
+        else {
+            loginBlock.style.display = 'block';
+
+        }
+
+    });
+</script> -->
+
+
+<!-- Recommended style -->
+<script>
+
+    const divider = document.createElement('div')
+    divider.style.height = '1px'
+    divider.style.backgroundColor = "#808080"
+
+    function createLooksCard(looksData) {
+        console.log(looksData)
+
+        const looksCard = document.createElement('div')
+        looksCard.style = "width:350px;height:400px; margin:20px";
+        looksCard.style.display = 'flex';
+        looksCard.style.borderRadius = "12px";
+        looksCard.style.backgroundColor = "#F8F8F8";
+        looksCard.style.alignItems = 'center';
+        looksCard.style.justifyContent = 'space-';
+        looksCard.style.padding = '10px';
+        looksCard.style.boxShadow = '0 8px 6px -6px grey';
+
+        function buildCardTitle(title) {
+            const cardHeader = document.createElement('div')
+            cardHeader.style.display = 'flex'
+            cardHeader.style.flexDirection = 'row'
+
+            cardHeader.appendChild(divider)
+
+            const cardTitle = document.createElement('p')
+            cardTitle.innerText = title
+            cardTitle.style.padding = '10px'
+
+            cardHeader.appendChild(cardTitle)
+            cardHeader.appendChild(divider)
+
+            return cardHeader
+        }
+
+        looksCard.appendChild(buildCardTitle(looksData.title))
+
+        const looksImageContainer = document.createElement('div')
+        looksImageContainer.style.display = 'flex';
+        looksImageContainer.style.flexDirection = 'row'
+        looksImageContainer.style.width = '300px'
+        looksImageContainer.style.flexWrap = 'wrap'
+
+        function buildClosetImageCard(imageUrl, productUrl, isHighlighted, isFromCloset) {
+            const imageContainer = document.createElement('div')
+            imageContainer.style.borderRadius = '12px'
+            imageContainer.style.width = '120px'
+            if (isHighlighted) {
+                imageContainer.style.height = '240px'
+            } else {
+                imageContainer.style.height = '120px'
+            }
+
+            const image = document.createElement('img')
+            image.style.width = '100%'
+            image.style.height = '100%'
+            image.src = imageUrl;
+            // image.style = "width:120px; height:120px; margin: 10px 10px; border-radius:5px;"
+
+            const imageFooter = document.createElement('div')
+            imageFooter.style.display = 'flex'
+            imageFooter.style.flexDirection = 'column'
+            imageFooter.style.alignItems = 'center'
+            imageFooter.style.justifyItems = 'center'
+            imageFooter.style.backgroundColor = "#d9d8d8"
+            imageFooter.style.bottom = '0px'
+            imageFooter.style.width = '100%'
+            imageFooter.style.height = '40px'
+
+            const itemHeader = document.createElement('h3')
+            if (isFromCloset) {
+                itemHeader.innerText = "PICK"
+            } else {
+                itemHeader.innerText = "SHOP"
+            }
+
+            const itemText = document.createElement('p')
+            if (isFromCloset) {
+                itemText.innerText = 'From your closet'
+            } else {
+                itemText.innerText = 'To complete your look'
+            }
+
+            imageFooter.appendChild(itemHeader)
+            imageFooter.appendChild(itemText)
+
+            imageContainer.appendChild(image)
+            imageContainer.appendChild(imageFooter)
+
+            return imageContainer
+        }
+
+        looksData.closet.forEach((closetElement) => {
+            looksImageContainer.appendChild(buildClosetImageCard(closetElement, null, true, true))
+        })
+
+        looksData.recommend.forEach((recommendedProduct) => {
+            // const recommendedElement = document.createElement('div')
+            // recommendedElement.style.display = 'flex'
+            // recommendedElement.style.flexDirection = 'column'
+            //
+            // const image = document.createElement('img')
+            // image.src = recommendedProduct.image;
+            // image.style = "width:120px; height:120px; margin: 10px 10px; border-radius:5px;"
+            //
+            // recommendedElement.appendChild(image)
+            //
+            // const a = document.createElement('a')
+            // a.href = recommendedProduct.url;
+            // a.target = "_blank";
+            // a.style = "position: relative; display:flex; flex-direction:column; align-items: center";
+            // recommendedElement.appendChild(image)
+            //
+            // looksImageContainer.appendChild(recommendedElement)
+
+            looksCard.appendChild(buildClosetImageCard(recommendedProduct.image, recommendedProduct.url, false, false))
+
+        })
+
+
+        // textDiv = document.createElement('div')
+        // shopTextHead = document.createElement('p')
+        // shopTextHead.style = "font-size:14px; font-weight:bolder; color:black;"
+        // shopTextParagraph = document.createElement('p')
+        // shopTextParagraph.style = "font-size:10px; color:#333;"
+        //
+        // shopTextHead.innerText = "SHOP";
+        // // shopTextParagraph.innerText = "To Complete the Looks";
+        //
+        // textDiv.appendChild(shopTextHead)
+        // // textDiv.appendChild(shopTextParagraph)
+        // textDiv.style = "position:absolute; width:100%; bottom:0px; text-align:center; background-color: rgba(221, 221, 221, 0.42); :hover{background-color:rgba(14, 102, 7, 0.35)}";
+        // // object.onmouseover =
+        // a.appendChild(textDiv)
+
+        // shopimages = document.getElementById("shopimages")
+        // shopimages.appendChild(a)
+
+        return looksCard
+    }
+
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            const id = "TORyU6lT3zNt1odX7eoELrf0jYa2"
+            // user.uid
+            const looksContainer = document.getElementById('look_container')
+            looksContainer.style.display = 'flex'
+            looksContainer.style.flexDirection = 'column'
+            looksContainer.style.alignItems = 'center'
+
+            firebase.firestore().collection("users").doc(id).collection("looks")
+                .get().then((querySnapshot) => {
+                    console.log("got data from firestore")
+                    console.log("no of looks", querySnapshot.size)
+
+                    querySnapshot.forEach((doc) => {
+                        const look = doc.data()
+
+                        looksContainer.appendChild(createLooksCard(look))
+                    });
+                });
+        }
+    });
+</script>
+
+
+</html>
