@@ -21,7 +21,7 @@ const messaging = firebase.messaging();
 
 messaging.getToken({ vapidKey: 'BApI0asOcygMhR0DdrE-6-D15PHOQOtHOvZKP1RxedHu3bqDTyuyIE3lXb-1LkJoOqDP2Q9kfWWT9TKzfgz61Ak' }).then((currentToken) => {
   if (currentToken) {
-    console.log(currentToken)
+    console.log("token", currentToken)
     // ...
   } else {
     // Show permission request UI
@@ -32,3 +32,25 @@ messaging.getToken({ vapidKey: 'BApI0asOcygMhR0DdrE-6-D15PHOQOtHOvZKP1RxedHu3bqD
   console.log('An error occurred while retrieving token. ', err);
   // ...
 });
+
+
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  // ...
+})
+
+
+
+messaging.onBackgroundMessage((payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: '/firebase-logo.png'
+  };
+
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
+});
+

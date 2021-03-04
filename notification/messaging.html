@@ -23,9 +23,7 @@
 
 <body>
     <div class="container">
-        <div id="firebaseui-auth-container">
 
-        </div>
         <div id="style-div">
             <h1>hello8</h1>
         </div>
@@ -54,77 +52,36 @@
 
 
 
-<script type="text/javascript">
-    // FirebaseUI config.
-    var uiConfig = {
-        signInSuccessUrl: 'https://muklasar.github.io/swagitAdmin/notification/messaging',
-        signInOptions: [
-            // Leave the lines as is for the providers you want to offer your users.
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        ],
-        //'signInFlow': 'popup',
-        // tosUrl and privacyPolicyUrl accept either url string or a callback
-        // function.
-        // Terms of service url/callback.
-        tosUrl: '<your-tos-url>',
-        // Privacy policy url/callback.
-        privacyPolicyUrl: function () {
-            window.location.assign('https://muklasar.github.io/swagitAdmin/notification/messaging');
-        }
-    };
-
-    // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
-</script>
-
-<script>
-
-    firebase.auth().onAuthStateChanged((user) => {
-
-        if (user) {
-            console.log("username", user.displayName)
-
-        }
-
-    });
-</script>
-<!-- <script>
-
-    const messaging = firebase.messaging();
-    messaging.requestPermission()
-        .then(function () {
-            console.log("GRANTED");
-            console.log(messaging.getToken());
-            return messaging.getToken();
-        })
-        .then(function (token) {
-            console.log(token);
-        })
-        .catch(function (err) {
-            console.log('Error Occurred.' + err)
-        });
-
-    messaging.setBackgroundMessageHandler(function (payload) {
-        const title = "Hello World";
-        const option = { body: payload.data.status }
-        return self.registration.showNotification(title, option);
-    });
-
-</script> -->
-
-
 
 <script>
 
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            navigator.serviceWorker.register('firebase-messaging-sw.js');
         });
     }
+
+    const messaging = firebase.messaging();
+    messaging.onMessage((payload) => {
+        console.log('Message received. ', payload);
+        // ...
+    })
+
+
+    
+    messaging.onBackgroundMessage((payload) => {
+        console.log('[firebase-messaging-sw.js] Received background message ', payload);
+        // Customize notification here
+        const notificationTitle = 'Background Message Title';
+        const notificationOptions = {
+            body: 'Background Message body.',
+            icon: '/firebase-logo.png'
+        };
+
+        self.registration.showNotification(notificationTitle,
+            notificationOptions);
+    });
+
 </script>
 
 </html>
