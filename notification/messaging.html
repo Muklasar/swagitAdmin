@@ -27,7 +27,7 @@
 
         </div>
         <div id="style-div">
-            <h1>hello6</h1>
+            <h1>hello8</h1>
         </div>
         <div>
 
@@ -92,7 +92,7 @@
 
     });
 </script>
-<script>
+<!-- <script>
 
     const messaging = firebase.messaging();
     messaging.requestPermission()
@@ -114,10 +114,17 @@
         return self.registration.showNotification(title, option);
     });
 
+</script> -->
+
+
+
+<script>
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        });
+    }
 </script>
-
-
-
-<script src="firebase-messaging-sw.js"></script>
 
 </html>
