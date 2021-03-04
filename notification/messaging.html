@@ -27,7 +27,7 @@
 
         </div>
         <div id="style-div">
-            <h1>hello2</h1>
+            <h1>hello3</h1>
         </div>
         <div>
 
@@ -86,7 +86,7 @@
     firebase.auth().onAuthStateChanged((user) => {
        
         if (user) {
-            console.log(user.diaplayName)
+            console.log("username", user.displayName)
 
         }
 
