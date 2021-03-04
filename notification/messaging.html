@@ -27,7 +27,7 @@
 
         </div>
         <div id="style-div">
-            <h1>hello4</h1>
+            <h1>hello5</h1>
         </div>
         <div>
 
@@ -94,34 +94,25 @@
 </script>
 <script>
 
-
     const messaging = firebase.messaging();
     messaging.requestPermission()
         .then(function () {
-            console.log('Have permission')
-            // return messaging.getToken
-            token = messaging.getToken()
-            console.log(token)
+            console.log("GRANTED");
+            console.log(messaging.getToken());
+            return messaging.getToken();
         })
         .then(function (token) {
-            console.log(token)
+            console.log(token);
         })
         .catch(function (err) {
-            console.log('error Occured')
-        })
+            console.log('Error Occurred.' + err)
+        });
 
-
-    // messaging.onBackgroundMessage(function (payload) {
-    //     console.log('Received background message ', payload);
-
-    //     const notificationTitle = payload.notification.title;
-    //     const notificationOptions = {
-    //         body: payload.notification.body,
-    //     };
-
-    //     self.registration.showNotification(notificationTitle,
-    //         notificationOptions);
-    // });
+    messaging.setBackgroundMessageHandler(function (payload) {
+        const title = "Hello World";
+        const option = { body: payload.data.status }
+        return self.registration.showNotification(title, option);
+    });
 
 </script>
 
