@@ -27,7 +27,7 @@
 
         </div>
         <div id="style-div">
-            <h1>hello3</h1>
+            <h1>hello4</h1>
         </div>
         <div>
 
@@ -84,7 +84,7 @@
 <script>
 
     firebase.auth().onAuthStateChanged((user) => {
-       
+
         if (user) {
             console.log("username", user.displayName)
 
@@ -100,7 +100,7 @@
         .then(function () {
             console.log('Have permission')
             // return messaging.getToken
-            token =  messaging.getToken()
+            token = messaging.getToken()
             console.log(token)
         })
         .then(function (token) {
@@ -109,6 +109,19 @@
         .catch(function (err) {
             console.log('error Occured')
         })
+
+
+    messaging.onBackgroundMessage(function (payload) {
+        console.log('Received background message ', payload);
+
+        const notificationTitle = payload.notification.title;
+        const notificationOptions = {
+            body: payload.notification.body,
+        };
+
+        self.registration.showNotification(notificationTitle,
+            notificationOptions);
+    });
 
 </script>
 
