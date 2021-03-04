@@ -2,18 +2,30 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js');
 
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDOralpZ69Eh_YMOHWR8LHRPtKZTBQFtMs",
-  authDomain: "swagit-authentication.firebaseapp.com",
-  databaseURL: "https://swagit-authentication-default-rtdb.firebaseio.com",
-  projectId: "swagit-authentication",
-  storageBucket: "swagit-authentication.appspot.com",
-  messagingSenderId: "756142162673",
-  appId: "1:756142162673:web:133a71fdd7f5c2a0b61f50",
-  measurementId: "G-R2BLQHPN4N"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('firebase-messaging-sw.js')
+    .then(function(registration) {
+      console.log('Registration successful, scope is:', registration.scope);
+    }).catch(function(err) {
+      console.log('Service worker registration failed, error:', err);
+    });
+  }
+
+
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyDOralpZ69Eh_YMOHWR8LHRPtKZTBQFtMs",
+    authDomain: "swagit-authentication.firebaseapp.com",
+    databaseURL: "https://swagit-authentication-default-rtdb.firebaseio.com",
+    projectId: "swagit-authentication",
+    storageBucket: "swagit-authentication.appspot.com",
+    messagingSenderId: "756142162673",
+    appId: "1:756142162673:web:133a71fdd7f5c2a0b61f50",
+    measurementId: "G-R2BLQHPN4N"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
 
 // navigator.serviceWorker.getRegistrations().then(function(registrations) { for(let registration of registrations) { registration.unregister() } })
 
