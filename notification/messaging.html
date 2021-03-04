@@ -99,7 +99,9 @@
     messaging.requestPermission()
         .then(function () {
             console.log('Have permission')
-            return messaging.getToken()
+            // return messaging.getToken
+            token =  messaging.getToken()
+            console.log(token)
         })
         .then(function (token) {
             console.log(token)
