@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-
+        <div id="firebaseui-auth-container"></div>
         <div id="style-div">
             <h1>hello3</h1>
         </div>
@@ -40,9 +40,44 @@
 </script>
 
 
+<script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+        signInSuccessUrl: '',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        //'signInFlow': 'popup',
+        // tosUrl and privacyPolicyUrl accept either url string or a callback
+        // function.
+        // Terms of service url/callback.
+        tosUrl: '<your-tos-url>',
+        // Privacy policy url/callback.
+        privacyPolicyUrl: function () {
+            window.location.assign('/');
+        }
+    };
 
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
 
+<script>
 
+    firebase.auth().onAuthStateChanged((user) => {
+        var currentPath = window.location.pathname;
+        if (user) {
+            console.log('User is login')
+            console.log('Email' + user.email)
+        }
+
+    });
+</script>
 <script>
 
     if ('serviceWorker' in navigator) {
