@@ -34,6 +34,10 @@ messaging.getToken({ vapidKey: 'BApI0asOcygMhR0DdrE-6-D15PHOQOtHOvZKP1RxedHu3bqD
 });
 
 
+
+
+
+
 // messaging.onMessage((payload) => {
 //   console.log('Message received. ', payload);
 //   // ...
